@@ -1,6 +1,7 @@
-﻿using SkiaSharp;
+﻿using PhotoProcessor.Editing.Objects;
+using SkiaSharp;
 
-namespace PhotoProcessor.Objects.Shapes
+namespace PhotoProcessor.Editing.Objects.Shapes
 {
     public abstract class ShapeObject : DrawingObject
     {

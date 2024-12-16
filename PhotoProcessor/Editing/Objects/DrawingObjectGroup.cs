@@ -3,7 +3,7 @@ using PhotoProcessor.Abstraction;
 using PhotoProcessor.Editing.Collections;
 using SkiaSharp;
 
-namespace PhotoProcessor.Objects
+namespace PhotoProcessor.Editing.Objects
 {
     public class DrawingObjectGroup : DrawingObject, IList<DrawingObject>, IRenderable
     {

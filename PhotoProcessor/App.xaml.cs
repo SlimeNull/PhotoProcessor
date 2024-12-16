@@ -23,6 +23,7 @@ namespace PhotoProcessor
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowModel>();
 
+            services.AddSingleton<ProjectManager>();
             services.AddSingleton<ToolsManager>();
 
             services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);

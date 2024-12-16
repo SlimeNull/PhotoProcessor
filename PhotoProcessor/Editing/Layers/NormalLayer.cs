@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using PhotoProcessor.Abstraction;
 using PhotoProcessor.Editing.Collections;
+using PhotoProcessor.Editing.Objects;
 using PhotoProcessor.Extensions;
-using PhotoProcessor.Objects;
 using SkiaSharp;
 
-namespace PhotoProcessor.Editing
+namespace PhotoProcessor.Editing.Layers
 {
     public class NormalLayer : Layer
     {

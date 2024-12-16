@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using PhotoProcessor.Editing.Layers;
+using SkiaSharp;
 
 namespace PhotoProcessor.Editing.Masking
 {

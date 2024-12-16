@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using PhotoProcessor.Editing.Collections;
+using PhotoProcessor.Editing.Objects;
 using PhotoProcessor.Extensions;
-using PhotoProcessor.Objects;
 using SkiaSharp;
 
-namespace PhotoProcessor.Editing
+namespace PhotoProcessor.Editing.Layers
 {
     public class LayerGroup : Layer, IList<Layer>
     {

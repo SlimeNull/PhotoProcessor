@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PhotoProcessor.Editing;
+using PhotoProcessor.Editing.Layers;
 using PhotoProcessor.Editing.Tools;
 using PhotoProcessor.Extensions;
 using SkiaSharp;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using PhotoProcessor.Abstraction;
 using SkiaSharp;
 
-namespace PhotoProcessor.Objects
+namespace PhotoProcessor.Editing.Objects
 {
     public abstract class DrawingObject : IRenderable
     {

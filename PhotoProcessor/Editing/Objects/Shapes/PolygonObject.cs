@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace PhotoProcessor.Objects.Shapes
+namespace PhotoProcessor.Editing.Objects.Shapes
 {
     public class PolygonObject : ShapeObject
     {

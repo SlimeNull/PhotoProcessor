@@ -7,14 +7,17 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using PhotoProcessor.Editing;
+using PhotoProcessor.Editing.Layers;
 using PhotoProcessor.Editing.Tools;
 using PhotoProcessor.Messages;
+using PhotoProcessor.Services;
 
 namespace PhotoProcessor.ViewModels
 {
     public partial class MainWindowModel : ObservableObject
     {
         private readonly IMessenger _messenger;
+        private readonly ProjectManager _projectManager;
 
         [ObservableProperty]
         private Project _editingProject = new Project(512, 512, SkiaSharp.SKColorType.Bgra8888);
@@ -25,9 +28,15 @@ namespace PhotoProcessor.ViewModels
         [ObservableProperty]
         private Layer? _selectedLayer;
 
-        public MainWindowModel(IMessenger messenger)
+        [ObservableProperty]
+        private bool _pointSampling;
+
+        public MainWindowModel(
+            IMessenger messenger,
+            ProjectManager projectManager)
         {
-            this._messenger = messenger;
+            _messenger = messenger;
+            _projectManager = projectManager;
         }
 
 

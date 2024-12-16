@@ -6,14 +6,26 @@
         xmlns:local="clr-namespace:PhotoProcessor"
         xmlns:ws="https://schemas.elecho.dev/wpfsuite"
         xmlns:c="clr-namespace:PhotoProcessor.Controls"
+        xmlns:vc="clr-namespace:PhotoProcessor.ValueConverters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}">
+    <Window.Resources>
+        <vc:BooleanToBitmapScalingModeConverter x:Key="IsPointSamplingToBitmapScalingModeConverter"
+                                                ValueWhenTrue="NearestNeighbor"
+                                                ValueWhenFalse="HighQuality"/>
+    </Window.Resources>
+
     <Grid>
         <DockPanel>
             <ws:Grid x:Name="AppMenuArea" DockPanel.Dock="Top">
                 <ws:Menu x:Name="AppMenu">
                     <ws:MenuItem Header="File"/>
+                    <ws:MenuItem Header="View">
+                        <ws:MenuItem Header="Point Sampling"
+                                     IsCheckable="True"
+                                     IsChecked="{Binding ViewModel.PointSampling}"/>
+                    </ws:MenuItem>
                 </ws:Menu>
             </ws:Grid>
             <ws:Grid x:Name="AppToolMenuArea" DockPanel.Dock="Top">
@@ -24,10 +36,12 @@
                             SelectedItem="{Binding ViewModel.SelectedTool}">
                     <ws:ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Path Data="{Binding Icon}"
-                                  Width="32" Height="32"
-                                  Stroke="Black"
-                                  StrokeThickness="2"/>
+                            <Viewbox Width="16" Height="16"
+                                     Margin="4">
+                                <Path Data="{Binding Icon}"
+                                      Stroke="Black"
+                                      StrokeThickness="10"/>
+                            </Viewbox>
                         </DataTemplate>
                     </ws:ListBox.ItemTemplate>
                 </ws:ListBox>
@@ -53,7 +67,11 @@
                             <ws:ListBox ItemsSource="{Binding ViewModel.EditingProject.Layers}"
                                         SelectedItem="{Binding ViewModel.SelectedLayer}"
                                         BorderThickness="0">
-
+                                <ws:ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ws:ListBox.ItemTemplate>
                             </ws:ListBox>
                         </DockPanel>
                     </ws:Border>
@@ -61,10 +79,11 @@
             </ws:Grid>
             <ws:Grid x:Name="AppMainArea">
                 <Viewbox>
-                    <c:ProjectEditor x:Name="AppProjectEditor" 
+                    <c:ProjectEditor x:Name="AppProjectEditor"
                                      Project="{Binding ViewModel.EditingProject}"
                                      CurrentLayer="{Binding ViewModel.SelectedLayer}"
-                                     CurrentTool="{Binding ViewModel.SelectedTool}"/>
+                                     CurrentTool="{Binding ViewModel.SelectedTool}"
+                                     RenderOptions.BitmapScalingMode="{Binding ViewModel.PointSampling,Mode=OneWay,Converter={StaticResource IsPointSamplingToBitmapScalingModeConverter}}"/>
                 </Viewbox>
             </ws:Grid>
         </DockPanel>

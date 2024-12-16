@@ -1,4 +1,4 @@
-﻿using PhotoProcessor.Objects;
+﻿using PhotoProcessor.Editing.Objects;
 
 namespace PhotoProcessor.Editing.Collections
 {

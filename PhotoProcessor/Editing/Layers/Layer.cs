@@ -2,7 +2,7 @@
 using PhotoProcessor.Editing.Masking;
 using SkiaSharp;
 
-namespace PhotoProcessor.Editing
+namespace PhotoProcessor.Editing.Layers
 {
     public abstract class Layer : IChild<Project>, IRenderable
     {

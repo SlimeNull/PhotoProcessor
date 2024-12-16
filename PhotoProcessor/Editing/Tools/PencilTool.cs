@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using PhotoProcessor.Editing.Layers;
 using PhotoProcessor.Helpers;
 using PhotoProcessor.Utilities;
 using SkiaSharp;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using PhotoProcessor.Editing.Layers;
 
 namespace PhotoProcessor.Editing.Tools
 {
