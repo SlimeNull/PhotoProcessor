@@ -1,0 +1,72 @@
+﻿<Window x:Class="PhotoProcessor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhotoProcessor"
+        xmlns:ws="https://schemas.elecho.dev/wpfsuite"
+        xmlns:c="clr-namespace:PhotoProcessor.Controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}">
+    <Grid>
+        <DockPanel>
+            <ws:Grid x:Name="AppMenuArea" DockPanel.Dock="Top">
+                <ws:Menu x:Name="AppMenu">
+                    <ws:MenuItem Header="File"/>
+                </ws:Menu>
+            </ws:Grid>
+            <ws:Grid x:Name="AppToolMenuArea" DockPanel.Dock="Top">
+
+            </ws:Grid>
+            <ws:Grid x:Name="AppToolsPaneArea" DockPanel.Dock="Left">
+                <ws:ListBox ItemsSource="{Binding ToolsManager.Tools}"
+                            SelectedItem="{Binding ViewModel.SelectedTool}">
+                    <ws:ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Path Data="{Binding Icon}"
+                                  Width="32" Height="32"
+                                  Stroke="Black"
+                                  StrokeThickness="2"/>
+                        </DataTemplate>
+                    </ws:ListBox.ItemTemplate>
+                </ws:ListBox>
+            </ws:Grid>
+            <ws:Grid x:Name="AppEditingPaneArea" DockPanel.Dock="Right">
+                <ws:Grid RowDefinitions="2*,2*,4*"
+                         MinWidth="200">
+                    <ws:Border x:Name="ProjectLayers"
+                               Grid.Row="2"
+                               BorderBrush="Gray"
+                               BorderThickness="1">
+                        <DockPanel>
+                            <ws:StackPanel DockPanel.Dock="Bottom"
+                                           Orientation="Horizontal"
+                                           HorizontalAlignment="Right"
+                                           Spacing="4">
+                                <ws:Button Content="Add"
+                                           Command="{Binding ViewModel.AddLayerCommand}"/>
+                                <ws:Button Content="Remove"
+                                           Command="{Binding ViewModel.RemoveLayerCommand}"
+                                           CommandParameter="{Binding ViewModel.SelectedLayer}"/>
+                            </ws:StackPanel>
+                            <ws:ListBox ItemsSource="{Binding ViewModel.EditingProject.Layers}"
+                                        SelectedItem="{Binding ViewModel.SelectedLayer}"
+                                        BorderThickness="0">
+
+                            </ws:ListBox>
+                        </DockPanel>
+                    </ws:Border>
+                </ws:Grid>
+            </ws:Grid>
+            <ws:Grid x:Name="AppMainArea">
+                <Viewbox>
+                    <c:ProjectEditor x:Name="AppProjectEditor" 
+                                     Project="{Binding ViewModel.EditingProject}"
+                                     CurrentLayer="{Binding ViewModel.SelectedLayer}"
+                                     CurrentTool="{Binding ViewModel.SelectedTool}"/>
+                </Viewbox>
+            </ws:Grid>
+        </DockPanel>
+    </Grid>
+</Window>
