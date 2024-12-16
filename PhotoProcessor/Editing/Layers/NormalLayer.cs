@@ -19,7 +19,7 @@ namespace PhotoProcessor.Editing.Layers
         public NormalLayer(Project project) : base(project)
         {
             Bitmap = new SKBitmap(project.PixelWidth, project.PixelHeight, project.ColorType, SKAlphaType.Unpremul);
-            Bitmap.Erase(new SKColor(255, 255, 255, 255));
+            Bitmap.Erase(new SKColor(0, 0, 0, 0));
 
             DrawingObjects = new DrawingObjectCollection();
         }

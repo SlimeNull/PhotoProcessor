@@ -8,7 +8,8 @@
         xmlns:c="clr-namespace:PhotoProcessor.Controls"
         xmlns:vc="clr-namespace:PhotoProcessor.ValueConverters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="PhotoProcessor" Height="450" Width="800"
+        Background="#f7fafb"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}">
     <Window.Resources>
         <vc:BooleanToBitmapScalingModeConverter x:Key="IsPointSamplingToBitmapScalingModeConverter"

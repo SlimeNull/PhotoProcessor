@@ -13,7 +13,7 @@ namespace PhotoProcessor.Extensions
         {
             return colorType switch
             {
-                SKColorType.Bgra8888 => System.Windows.Media.PixelFormats.Bgr32,
+                SKColorType.Bgra8888 => System.Windows.Media.PixelFormats.Bgra32,
                 SKColorType.Gray8 => System.Windows.Media.PixelFormats.Gray8,
                 _ => throw new NotSupportedException(),
             };

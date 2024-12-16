@@ -12,6 +12,7 @@ using PhotoProcessor.Editing;
 using PhotoProcessor.Editing.Layers;
 using PhotoProcessor.Editing.Tools;
 using PhotoProcessor.Extensions;
+using PhotoProcessor.Helpers;
 using SkiaSharp;
 
 namespace PhotoProcessor.Controls
@@ -20,6 +21,7 @@ namespace PhotoProcessor.Controls
     {
         private SKBitmap? _buffer;
         private WriteableBitmap? _cachedBitmap;
+        private Cache<WriteableBitmap, Brush> _fillBrushCache;
 
         static ProjectEditor()
         {
@@ -42,6 +44,11 @@ namespace PhotoProcessor.Controls
         {
             get { return (Tool)GetValue(CurrentToolProperty); }
             set { SetValue(CurrentToolProperty, value); }
+        }
+
+        public ProjectEditor()
+        {
+            _fillBrushCache = new Cache<WriteableBitmap, Brush>(bmp => new ImageBrush(bmp));
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
@@ -127,14 +134,16 @@ namespace PhotoProcessor.Controls
                 _buffer.Height != Project.PixelHeight)
             {
                 _buffer = new SKBitmap(Project.PixelWidth, Project.PixelHeight, Project.ColorType, SKAlphaType.Unpremul);
+                _buffer.Erase(new SKColor(0, 0, 0, 0));
             }
 
             using var canvas = new SKCanvas(_buffer);
             Project.Render(canvas);
 
             _cachedBitmap.WritePixels(new Int32Rect(0, 0, Project.PixelWidth, Project.PixelHeight), _buffer.GetPixels(), _buffer.ByteCount, _buffer.RowBytes);
+            var brush = _fillBrushCache.GetValue(_cachedBitmap);
 
-            drawingContext.DrawImage(_cachedBitmap, new Rect(0, 0, Project.PixelWidth, Project.PixelHeight));
+            drawingContext.DrawRectangle(brush, null, new Rect(0, 0, Project.PixelWidth, Project.PixelHeight));
         }
 
         public static readonly DependencyProperty ProjectProperty =
